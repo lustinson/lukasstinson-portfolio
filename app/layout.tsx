@@ -92,6 +92,16 @@ export const metadata: Metadata = {
   verification: {
     google: "3onnwFqbLAvgU0ms7kJVsdiAp0eVVFH9frDum4DVmDc"
   },
+
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: [
+      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
 };
 
 export default function RootLayout({
