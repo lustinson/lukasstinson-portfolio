@@ -468,7 +468,18 @@ export default function Home() {
                             {item.title}
                           </h3>
                           <p className="text-blue-600 dark:text-blue-400 font-medium">
-                            {item.organization}
+                            {/^https?:\/\/|(\.com|\.org|\.net|\.io|\.ca|\.dev|\.ai|\.co|\.edu|\.gov|\.us|\.uk)\b/i.test(item.organization) ? (
+                              <a 
+                                href={`https://${item.organization.toLowerCase()}`}
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="hover:underline"
+                              >
+                                {item.organization}
+                              </a>
+                            ) : (
+                              item.organization
+                            )}
                           </p>
                           {item.location && (
                             <p className="text-sm text-zinc-400">
