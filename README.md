@@ -2,6 +2,8 @@
 
 A modern, SEO-optimized portfolio website built with Next.js 14, React, TypeScript, and Tailwind CSS.
 
+lukasstinson.com
+
 ## Features
 
 - 🎨 Modern, responsive design with dark mode support
