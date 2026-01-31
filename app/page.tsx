@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 interface TimelineItem {
   id: string;
@@ -188,13 +188,28 @@ const getTypeBadgeColor = (type: string) => {
 
 export default function Home() {
   const [filter, setFilter] = useState<'all' | 'experience' | 'project'>('all');
+  const timelineRef = useRef<HTMLDivElement>(null);
 
   const filteredData = filter === 'all' 
     ? timelineData 
     : timelineData.filter(item => item.type === filter);
 
+  const handleFilterChange = (newFilter: 'all' | 'experience' | 'project') => {
+    setFilter(newFilter);
+    // Scroll to timeline section with smooth behavior
+    setTimeout(() => {
+      timelineRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-zinc-50 to-zinc-100 dark:from-zinc-950 dark:to-black font-sans">
+    <div 
+      className="min-h-screen font-sans bg-cover bg-center bg-fixed bg-no-repeat"
+      style={{
+        backgroundImage: 'url(https://coolbackgrounds.imgix.net/4lBzkVBmJ0qvFJ90SJHEdV/7645fc49f7f1fb4a8c31a94fc4c97f4d/black-particles-background.png?w=3840&q=60&auto=format,compress)',
+        backgroundColor: '#000'
+      }}
+    >
       {/* Header */}
       <header className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border-b border-zinc-200 dark:border-zinc-800 sticky top-0 z-10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -235,7 +250,7 @@ export default function Home() {
             {/* Filter Buttons */}
             <div className="flex flex-wrap gap-2">
               <button
-                onClick={() => setFilter('all')}
+                onClick={() => handleFilterChange('all')}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                   filter === 'all'
                     ? 'bg-zinc-900 text-white dark:bg-zinc-50 dark:text-zinc-900'
@@ -245,7 +260,7 @@ export default function Home() {
                 All
               </button>
               <button
-                onClick={() => setFilter('experience')}
+                onClick={() => handleFilterChange('experience')}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                   filter === 'experience'
                     ? 'bg-blue-600 text-white dark:bg-blue-600'
@@ -255,7 +270,7 @@ export default function Home() {
                 Experience
               </button>
               <button
-                onClick={() => setFilter('project')}
+                onClick={() => handleFilterChange('project')}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                   filter === 'project'
                     ? 'bg-purple-600 text-white dark:bg-purple-600'
@@ -270,75 +285,82 @@ export default function Home() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Summary */}
-        <div className="bg-white dark:bg-zinc-900 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 mb-8">
-          <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50 mb-3">
-            Hey There!
-          </h2>
-          <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed">
-          I'm a software developer with experience across data integrations, cloud infrastructure, and full-stack development. 
-          <br />
-          <br />
-          I've worked in small teams and startup environments where I helped migrate platforms, build ETL pipelines, develop AWS-based integrations, and ship features quickly. I'm a fast learner who loves picking up new technologies, solving hard problems, and contributing wherever I can add value. 
-          <br />
-          <br />
-          I'm dedicated, adaptable, and always eager to take on new challenges that push my skills forward.
-          </p>
-          <div className="mt-4">
-            <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-50 mb-2">Technical Skills</h3>
-            <div className="flex flex-wrap gap-2">
-              <span className="px-3 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-full text-sm">
-                JavaScript/TypeScript
-              </span>
-              <span className="px-3 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-full text-sm">
-                React.js
-              </span>
-              <span className="px-3 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-full text-sm">
-                Python
-              </span>
-              <span className="px-3 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-full text-sm">
-                SQL
-              </span>
-              <span className="px-3 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-full text-sm">
-                PostgreSQL
-              </span>
-              <span className="px-3 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-full text-sm">
-                MS SQL Server
-              </span>
-              <span className="px-3 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-full text-sm">
-                AWS S3
-              </span>
-              <span className="px-3 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-full text-sm">
-                AWS Glue
-              </span>
-              <span className="px-3 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-full text-sm">
-                AWS Lambda
-              </span>
-              <span className="px-3 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-full text-sm">
-                AWS CDK
-              </span>
-              <span className="px-3 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-full text-sm">
-                C
-              </span>
-              <span className="px-3 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-full text-sm">
-                Java
-              </span>
-              <span className="px-3 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-full text-sm">
-                MongoDB
-              </span>
-              <span className="px-3 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-full text-sm">
-                Django
-              </span>
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-zinc-900/75">
+        <div className="lg:grid lg:grid-cols-12 lg:gap-8">
+          {/* Sidebar - About Section (sticky on large screens, top on mobile) */}
+          <aside className="lg:col-span-4 mb-8 lg:mb-0">
+            <div className="lg:sticky lg:top-40 space-y-6">
+              <div className="bg-transparent lg:bg-zinc-900/75 rounded-lg shadow-sm border border-transparent lg:border-zinc-800 p-6">
+                <h2 className="text-xl font-semibold text-zinc-50 mb-3">
+                  Hey There!
+                </h2>
+                <p className="text-zinc-300 leading-relaxed text-sm">
+                I'm a software developer with experience across data integrations, cloud infrastructure, and full-stack development. 
+                <br />
+                <br />
+                I've worked in small teams and startup environments where I helped migrate platforms, build ETL pipelines, develop AWS-based integrations, and ship features quickly. I'm a fast learner who loves picking up new technologies, solving hard problems, and contributing wherever I can add value. 
+                <br />
+                <br />
+                I'm dedicated, adaptable, and always eager to take on new challenges that push my skills forward.
+                </p>
+                <div className="mt-4">
+                  <h3 className="text-sm font-semibold text-zinc-50 mb-2">Technical Skills</h3>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="px-2.5 py-1 bg-zinc-800 text-zinc-300 rounded-full text-xs">
+                      JavaScript/TypeScript
+                    </span>
+                    <span className="px-2.5 py-1 bg-zinc-800 text-zinc-300 rounded-full text-xs">
+                      React.js
+                    </span>
+                    <span className="px-2.5 py-1 bg-zinc-800 text-zinc-300 rounded-full text-xs">
+                      Python
+                    </span>
+                    <span className="px-2.5 py-1 bg-zinc-800 text-zinc-300 rounded-full text-xs">
+                      SQL
+                    </span>
+                    <span className="px-2.5 py-1 bg-zinc-800 text-zinc-300 rounded-full text-xs">
+                      PostgreSQL
+                    </span>
+                    <span className="px-2.5 py-1 bg-zinc-800 text-zinc-300 rounded-full text-xs">
+                      MS SQL Server
+                    </span>
+                    <span className="px-2.5 py-1 bg-zinc-800 text-zinc-300 rounded-full text-xs">
+                      AWS S3
+                    </span>
+                    <span className="px-2.5 py-1 bg-zinc-800 text-zinc-300 rounded-full text-xs">
+                      AWS Glue
+                    </span>
+                    <span className="px-2.5 py-1 bg-zinc-800 text-zinc-300 rounded-full text-xs">
+                      AWS Lambda
+                    </span>
+                    <span className="px-2.5 py-1 bg-zinc-800 text-zinc-300 rounded-full text-xs">
+                      AWS CDK
+                    </span>
+                    <span className="px-2.5 py-1 bg-zinc-800 text-zinc-300 rounded-full text-xs">
+                      C
+                    </span>
+                    <span className="px-2.5 py-1 bg-zinc-800 text-zinc-300 rounded-full text-xs">
+                      Java
+                    </span>
+                    <span className="px-2.5 py-1 bg-zinc-800 text-zinc-300 rounded-full text-xs">
+                      MongoDB
+                    </span>
+                    <span className="px-2.5 py-1 bg-zinc-800 text-zinc-300 rounded-full text-xs">
+                      Django
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          </aside>
 
-        {/* Education Section */}
-        <div className="bg-white dark:bg-zinc-900 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 mb-8">
+          {/* Main Content Area */}
+          <div className="lg:col-span-8">
+            {/* Education Section */}
+            <div className="bg-transparent lg:bg-zinc-900/75 rounded-lg shadow-sm border border-transparent lg:border-zinc-800 p-6 mb-8">
           <div className="flex items-center gap-2 mb-4">
             <div className="w-3 h-3 rounded-full bg-green-500 dark:bg-green-600"></div>
-            <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">
+            <h2 className="text-2xl font-bold text-zinc-50">
               Education
             </h2>
           </div>
@@ -346,123 +368,125 @@ export default function Home() {
           <div className="border-l-4 border-green-500 dark:border-green-600 pl-6">
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
               <div>
-                <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">
+                <h3 className="text-xl font-semibold text-zinc-50">
                   {educationData.degree}
                 </h3>
                 <p className="text-green-600 dark:text-green-400 font-medium">
                   {educationData.institution}
                 </p>
-                <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                <p className="text-sm text-zinc-400">
                   {educationData.location}
                 </p>
               </div>
-              <div className="text-sm text-zinc-600 dark:text-zinc-400 whitespace-nowrap">
+              <div className="text-sm text-zinc-400 whitespace-nowrap">
                 <time dateTime={educationData.startDate}>{formatDate(educationData.startDate)}</time>
                 {' - '}
                 <time dateTime={educationData.endDate}>{formatDate(educationData.endDate)}</time>
               </div>
             </div>
 
-            <ul className="space-y-2 text-zinc-700 dark:text-zinc-300 mb-4">
+            <ul className="space-y-2 text-zinc-300 mb-4">
               {educationData.description.map((desc, idx) => (
                 <li key={idx} className="flex gap-2 items-start">
-                  <span className="text-zinc-400 dark:text-zinc-600 leading-[1.75rem]">•</span>
+                  <span className="text-zinc-600 leading-[1.75rem]">•</span>
                   <span className="flex-1">{desc}</span>
                 </li>
               ))}
             </ul>
 
-            <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800">
-              <h4 className="text-sm font-semibold text-zinc-900 dark:text-zinc-50 mb-2">
+            <div className="pt-4 border-t border-zinc-800">
+              <h4 className="text-sm font-semibold text-zinc-50 mb-2">
                 Key Coursework
               </h4>
               <div className="flex flex-wrap gap-2">
                 {educationData.keyCoursework.map((course, idx) => (
                   <span
                     key={idx}
-                    className="px-2 py-1 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 rounded text-xs"
+                    className="px-2 py-1 bg-green-900 text-green-200 rounded text-xs"
                   >
                     {course}
                   </span>
                 ))}
               </div>
+              </div>
             </div>
           </div>
-        </div>
+            
+            {/* Timeline */}
+            <div ref={timelineRef} className="mb-6 scroll-mt-60 lg:scroll-mt-40">
+              <h2 className="text-2xl font-bold text-zinc-50 mb-6">
+                Experience & Projects
+              </h2>
+            </div>
+            
+            <div className="relative">
+              {/* Vertical line */}
+              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-zinc-700"></div>
 
-        {/* Timeline */}
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50 mb-6">
-            Experience & Projects
-          </h2>
-        </div>
-        
-        <div className="relative">
-          {/* Vertical line */}
-          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-zinc-300 dark:bg-zinc-700"></div>
+              {/* Timeline items */}
+              <div className="space-y-8">
+                {filteredData.map((item, index) => (
+                  <article key={item.id} className="relative pl-20 group">
+                    {/* Timeline dot */}
+                    <div
+                      className={`absolute left-6 top-2 w-5 h-5 rounded-full border-4 border-black ${getTypeColor(
+                        item.type
+                      )} group-hover:scale-125 transition-transform`}
+                    ></div>
 
-          {/* Timeline items */}
-          <div className="space-y-8">
-            {filteredData.map((item, index) => (
-              <article key={item.id} className="relative pl-20 group">
-                {/* Timeline dot */}
-                <div
-                  className={`absolute left-6 top-2 w-5 h-5 rounded-full border-4 border-white dark:border-zinc-950 ${getTypeColor(
-                    item.type
-                  )} group-hover:scale-125 transition-transform`}
-                ></div>
-
-                {/* Card */}
-                <div className="bg-white dark:bg-zinc-900 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 hover:shadow-md transition-shadow">
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <span
-                          className={`px-2 py-1 rounded text-xs font-medium uppercase ${getTypeBadgeColor(
-                            item.type
-                          )}`}
-                        >
-                          {item.type}
-                        </span>
+                    {/* Card */}
+                    <div className="bg-transparent lg:bg-zinc-900/75 rounded-lg shadow-sm border border-transparent lg:border-zinc-800 p-6 hover:shadow-md transition-shadow">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <span
+                              className={`px-2 py-1 rounded text-xs font-medium uppercase ${getTypeBadgeColor(
+                                item.type
+                              )}`}
+                            >
+                              {item.type}
+                            </span>
+                          </div>
+                          <h3 className="text-xl font-semibold text-zinc-50">
+                            {item.title}
+                          </h3>
+                          <p className="text-blue-600 dark:text-blue-400 font-medium">
+                            {item.organization}
+                          </p>
+                          {item.location && (
+                            <p className="text-sm text-zinc-400">
+                              {item.location}
+                            </p>
+                          )}
+                        </div>
+                        <div className="text-sm text-zinc-400 whitespace-nowrap">
+                          <time dateTime={item.startDate}>{formatDate(item.startDate)}</time>
+                          {' - '}
+                          <time dateTime={item.endDate}>{formatDate(item.endDate)}</time>
+                        </div>
                       </div>
-                      <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">
-                        {item.title}
-                      </h3>
-                      <p className="text-blue-600 dark:text-blue-400 font-medium">
-                        {item.organization}
-                      </p>
-                      {item.location && (
-                        <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                          {item.location}
-                        </p>
+
+                      <ul className="space-y-2 text-zinc-300">
+                        {item.description.map((desc, idx) => (
+                          <li key={idx} className="flex gap-2 items-start">
+                            <span className="text-zinc-600 leading-[1.5rem]">•</span>
+                            <span className="flex-1">{desc}</span>
+                          </li>
+                        ))}
+                      </ul>
+
+                      {item.highlights && (
+                        <div className="mt-3 pt-3 border-t border-zinc-800">
+                          <p className="text-sm font-medium text-zinc-50">
+                            {item.highlights}
+                          </p>
+                        </div>
                       )}
                     </div>
-                    <div className="text-sm text-zinc-600 dark:text-zinc-400 whitespace-nowrap">
-                      <time dateTime={item.startDate}>{formatDate(item.startDate)}</time>
-                      {' - '}
-                      <time dateTime={item.endDate}>{formatDate(item.endDate)}</time>
-                    </div>
-                  </div>
-
-                  <ul className="space-y-2 text-zinc-700 dark:text-zinc-300">
-                    {item.description.map((desc, idx) => (
-                      <li key={idx} className="flex gap-2 items-start">
-                        <span className="text-zinc-400 dark:text-zinc-600 leading-[1.5rem]">•</span>
-                        <span className="flex-1">{desc}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {item.highlights && (
-                    <div className="mt-3 pt-3 border-t border-zinc-200 dark:border-zinc-800">
-                      <p className="text-sm font-medium text-zinc-900 dark:text-zinc-50">
-                        {item.highlights}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </article>
-            ))}
+                  </article>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </main>
