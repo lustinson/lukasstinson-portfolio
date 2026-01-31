@@ -221,6 +221,14 @@ export default function Home() {
                 >
                   LinkedIn
                 </a>
+                <a 
+                  href="https://github.com/lustinson" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 dark:text-blue-400 hover:underline"
+                >
+                  GitHub
+                </a>
               </div>
             </div>
             
@@ -343,14 +351,16 @@ export default function Home() {
                 </p>
               </div>
               <div className="text-sm text-zinc-600 dark:text-zinc-400 whitespace-nowrap">
-                {formatDate(educationData.startDate)} - {formatDate(educationData.endDate)}
+                <time dateTime={educationData.startDate}>{formatDate(educationData.startDate)}</time>
+                {' - '}
+                <time dateTime={educationData.endDate}>{formatDate(educationData.endDate)}</time>
               </div>
             </div>
 
             <ul className="space-y-2 text-zinc-700 dark:text-zinc-300 mb-4">
               {educationData.description.map((desc, idx) => (
-                <li key={idx} className="flex gap-2">
-                  <span className="text-zinc-400 dark:text-zinc-600 mt-1.5">•</span>
+                <li key={idx} className="flex gap-2 items-start">
+                  <span className="text-zinc-400 dark:text-zinc-600 leading-[1.75rem]">•</span>
                   <span className="flex-1">{desc}</span>
                 </li>
               ))}
@@ -388,7 +398,7 @@ export default function Home() {
           {/* Timeline items */}
           <div className="space-y-8">
             {filteredData.map((item, index) => (
-              <div key={item.id} className="relative pl-20 group">
+              <article key={item.id} className="relative pl-20 group">
                 {/* Timeline dot */}
                 <div
                   className={`absolute left-6 top-2 w-5 h-5 rounded-full border-4 border-white dark:border-zinc-950 ${getTypeColor(
@@ -422,7 +432,9 @@ export default function Home() {
                       )}
                     </div>
                     <div className="text-sm text-zinc-600 dark:text-zinc-400 whitespace-nowrap">
-                      {formatDate(item.startDate)} - {formatDate(item.endDate)}
+                      <time dateTime={item.startDate}>{formatDate(item.startDate)}</time>
+                      {' - '}
+                      <time dateTime={item.endDate}>{formatDate(item.endDate)}</time>
                     </div>
                   </div>
 
@@ -443,7 +455,7 @@ export default function Home() {
                     </div>
                   )}
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         </div>

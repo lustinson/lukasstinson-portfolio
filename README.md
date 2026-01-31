@@ -1,36 +1,137 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Lukas Stinson - Portfolio Website
 
-## Getting Started
+A modern, SEO-optimized portfolio website built with Next.js 14, React, TypeScript, and Tailwind CSS.
 
-First, run the development server:
+## Features
+
+- 🎨 Modern, responsive design with dark mode support
+- 🔍 Comprehensive SEO optimization
+- 📊 Interactive timeline showcasing experience and projects
+- 🎓 Dedicated education section
+- 🏷️ Structured data (Schema.org) for better search engine understanding
+- 📱 Mobile-first, responsive layout
+- ⚡ Built with Next.js 14 App Router for optimal performance
+
+## SEO Features Implemented
+
+### 1. **Metadata & OpenGraph**
+- Comprehensive meta tags for search engines
+- Open Graph tags for social media sharing
+- Twitter Card support
+- Canonical URLs
+- Proper title templates
+
+### 2. **Structured Data (JSON-LD)**
+- Person schema with professional information
+- Education and skills data
+- Contact information and social links
+- Helps Google create knowledge panels
+
+### 3. **Semantic HTML**
+- Proper heading hierarchy (H1 → H2 → H3)
+- `<article>` tags for timeline items
+- `<time>` elements with dateTime attributes for dates
+- Accessibility-first markup
+
+### 4. **Technical SEO**
+- Automatic sitemap generation at `/sitemap.xml`
+- Robots.txt at `/robots.txt`
+- Proper robots meta tags
+- Fast page loads with Next.js optimization
+
+## Setup & Installation
 
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Post-Deployment SEO Checklist
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 1. **Google Search Console**
+```
+1. Go to https://search.google.com/search-console
+2. Add your property (https://lukasstinson.com)
+3. Verify ownership (DNS or file upload)
+4. Submit your sitemap: https://lukasstinson.com/sitemap.xml
+5. Copy verification code and add to layout.tsx metadata.verification.google
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 2. **Update Your Domain**
+Replace all instances of `lukasstinson.com` with your actual domain:
+- `app/layout.tsx` - metadataBase
+- `app/sitemap.ts` - baseUrl
+- `app/robots.ts` - sitemap URL
 
-## Learn More
+### 3. **Add Your GitHub**
+Update the structured data in `app/layout.tsx`:
+```typescript
+sameAs: [
+  "https://www.linkedin.com/in/lukasstinson422/",
+  "https://github.com/lustinson", // Add this
+],
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 4. **Test Your SEO**
+- Rich Results Test: https://search.google.com/test/rich-results
+- Mobile-Friendly Test: https://search.google.com/test/mobile-friendly
+- PageSpeed Insights: https://pagespeed.web.dev/
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 5. **Social Media Testing**
+- Twitter Card Validator: https://cards-dev.twitter.com/validator
+- Facebook Debugger: https://developers.facebook.com/tools/debug/
+- LinkedIn Post Inspector: https://www.linkedin.com/post-inspector/
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Performance Tips
 
-## Deploy on Vercel
+1. **Optimize Images**: Convert to WebP format for better compression
+2. **Enable Caching**: Configure proper cache headers in your hosting
+3. **Use a CDN**: Deploy on Vercel, Netlify, or similar for global CDN
+4. **Monitor Core Web Vitals**: Use Google Search Console
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Recommended: Vercel (Zero Config)
+```bash
+# Install Vercel CLI
+npm i -g vercel
+
+# Deploy
+vercel
+```
+
+### Alternative: Netlify
+```bash
+# Build command
+npm run build
+
+# Publish directory
+.next
+```
+
+## Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Fonts**: Geist Sans & Geist Mono
+- **Deployment**: Vercel (recommended)
+
+## License
+
+© 2026 Lukas Stinson. All rights reserved.
+
+## Contact
+
+- Email: stinser01@gmail.com
+- LinkedIn: [linkedin.com/in/lukasstinson422](https://www.linkedin.com/in/lukasstinson422/)
+- Location: Victoria, BC / Toronto, ON
