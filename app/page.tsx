@@ -49,7 +49,21 @@ const educationData: Education = {
 
 const timelineData: TimelineItem[] = [
   {
-    id: '1',
+    id: '9',
+    type: 'experience' as const,
+    title: 'Full Stack Developer',
+    organization: 'Dave',
+    location: 'Victoria, BC',
+    startDate: '2025-12',
+    endDate: 'present',
+    description: [
+     'Currently working as part of a 3-person team, contributing across the stack to help bring an early-stage product to market and support user growth and fundraising efforts',
+     'Owning and shipping features across a React/TypeScript frontend and Go backend, including AI-powered text functionality, product analytics, and core user experience improvements',
+     'Optimizing the marketing site, applying SEO best practices to support early-stage user growth and engagement'
+    ],
+  },
+  {
+    id: '8',
     type: 'experience' as const,
     title: 'Software Developer',
     organization: '8Twelve Mortgage Corp.',
@@ -66,7 +80,7 @@ const timelineData: TimelineItem[] = [
     ],
   },
   {
-    id: '2',
+    id: '7',
     type: 'experience' as const,
     title: 'Software Developer (Intern)',
     organization: '8Twelve Mortgage Corp.',
@@ -80,7 +94,7 @@ const timelineData: TimelineItem[] = [
     ],
   },
   {
-    id: '3',
+    id: '6',
     type: 'project' as const,
     title: 'MIR Automated DJ Software',
     organization: 'Music Information Retrieval (CSC475)',
@@ -93,7 +107,7 @@ const timelineData: TimelineItem[] = [
     highlights: 'Received a final grade of 99% over 2 progress reports, final report, and final presentation'
   },
   {
-    id: '4',
+    id: '5',
     type: 'experience' as const,
     title: 'Software Developer (Intern)',
     organization: 'Trellis Corp.',
@@ -106,7 +120,7 @@ const timelineData: TimelineItem[] = [
     ],
   },
   {
-    id: '5',
+    id: '4',
     type: 'project' as const,
     title: 'Building an OS',
     organization: 'Operating Systems (CSC360)',
@@ -119,7 +133,7 @@ const timelineData: TimelineItem[] = [
     ],
   },
   {
-    id: '6',
+    id: '3',
     type: 'experience' as const,
     title: 'Software Developer (Intern)',
     organization: 'Napoleon',
@@ -133,7 +147,7 @@ const timelineData: TimelineItem[] = [
     ],
   },
   {
-    id: '7',
+    id: '2',
     type: 'project' as const,
     title: 'Blackjack Application',
     organization: 'Personal Project',
@@ -145,7 +159,7 @@ const timelineData: TimelineItem[] = [
     ],
   },
   {
-    id: '8',
+    id: '1',
     type: 'project' as const,
     title: 'Computer Store Application',
     organization: 'Personal Project',
@@ -159,6 +173,9 @@ const timelineData: TimelineItem[] = [
 ].sort((a, b) => b.startDate.localeCompare(a.startDate));
 
 const formatDate = (dateString: string) => {
+  if (dateString.toLowerCase() === 'present') {
+    return 'Present';
+  }
   const [year, month] = dateString.split('-');
   const date = new Date(parseInt(year), parseInt(month) - 1);
   return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
