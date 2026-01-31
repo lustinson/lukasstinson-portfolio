@@ -31,10 +31,10 @@ const educationData: Education = {
   startDate: '2019-09',
   endDate: '2024-05',
   description: [
-    'Acquired proficiency in Git version control while utilizing Python and C programming languages',
-    'Developed expertise in artificial intelligence concepts, search algorithms, agent-based systems, and constraint satisfaction problems',
+    'Developed expertise in computer architecture, operating systems, algorithms and data structures, and programming techniques',
+    'Expanded knowledge in artificial intelligence concepts, search algorithms, agent-based systems, and constraint satisfaction problems',
     'Introduced to supervised machine learning algorithms and model training/testing methodologies, including SVM classifiers and regression techniques',
-    'Expanded knowledge of computer architecture, operating systems, algorithms and data structures, and programming techniques'
+    'Acquired proficiency in Git version control while utilizing Python and C programming languages'
   ],
   keyCoursework: [
     'Music Information Retrieval (CSC475)',
@@ -52,7 +52,7 @@ const timelineData: TimelineItem[] = [
     id: '9',
     type: 'experience' as const,
     title: 'Full Stack Developer',
-    organization: 'Dave',
+    organization: 'Buildwithdave.com',
     location: 'Victoria, BC',
     startDate: '2025-12',
     endDate: 'present',
