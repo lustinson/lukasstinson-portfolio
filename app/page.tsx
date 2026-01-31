@@ -58,8 +58,8 @@ const timelineData: TimelineItem[] = [
     endDate: 'present',
     description: [
      'Currently working as part of a 3-person team, contributing across the stack to help bring an early-stage product to market and support user growth and fundraising efforts',
-     'Owning and shipping features across a React/TypeScript frontend and Go backend, including AI-powered text functionality, product analytics, and core user experience improvements',
-     'Optimizing the marketing site, applying SEO best practices to support early-stage user growth and engagement'
+     'Owning and shipping features across a React/TypeScript frontend and Go backend',
+     'Optimizing the marketing site, applying SEO best practices'
     ],
   },
   {
