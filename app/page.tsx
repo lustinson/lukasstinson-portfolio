@@ -274,10 +274,16 @@ export default function Home() {
         {/* Summary */}
         <div className="bg-white dark:bg-zinc-900 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 mb-8">
           <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50 mb-3">
-            About
+            Hey There!
           </h2>
           <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed">
-          I'm a software developer with experience across data integrations, cloud infrastructure, and full-stack development. I've worked in small teams and startup environments where I helped migrate platforms, build ETL pipelines, develop AWS-based integrations, and ship features quickly. I'm a fast learner who loves picking up new technologies, solving hard problems, and contributing wherever I can add value. I'm dedicated, adaptable, and always eager to take on new challenges that push my skills forward.
+          I'm a software developer with experience across data integrations, cloud infrastructure, and full-stack development. 
+          <br />
+          <br />
+          I've worked in small teams and startup environments where I helped migrate platforms, build ETL pipelines, develop AWS-based integrations, and ship features quickly. I'm a fast learner who loves picking up new technologies, solving hard problems, and contributing wherever I can add value. 
+          <br />
+          <br />
+          I'm dedicated, adaptable, and always eager to take on new challenges that push my skills forward.
           </p>
           <div className="mt-4">
             <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-50 mb-2">Technical Skills</h3>
