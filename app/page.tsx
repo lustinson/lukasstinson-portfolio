@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 interface TimelineItem {
   id: string;
@@ -206,6 +206,38 @@ const getTypeBadgeColor = (type: string) => {
 export default function Home() {
   const [filter, setFilter] = useState<'all' | 'experience' | 'project'>('all');
   const timelineRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const [headerHidden, setHeaderHidden] = useState(false);
+  const headerHeightRef = useRef(0);
+  const headerHiddenRef = useRef(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!timelineRef.current || !headerRef.current) return;
+
+      const timelineRect = timelineRef.current.getBoundingClientRect();
+      const headerRect = headerRef.current.getBoundingClientRect();
+      
+      // Store header height when visible
+      if (headerRect.height > 0) {
+        headerHeightRef.current = headerRect.height;
+      }
+      
+      // Hide when section reaches header bottom, show when 30px above (hysteresis)
+      const threshold = headerHiddenRef.current ? headerHeightRef.current - 30 : headerHeightRef.current;
+      const shouldHide = timelineRect.top <= threshold;
+      
+      if (shouldHide !== headerHiddenRef.current) {
+        headerHiddenRef.current = shouldHide;
+        setHeaderHidden(shouldHide);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const filteredData = filter === 'all' 
     ? timelineData 
@@ -228,7 +260,12 @@ export default function Home() {
       }}
     >
       {/* Header */}
-      <header className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border-b border-zinc-200 dark:border-zinc-800 sticky top-0 z-10">
+      <header 
+        ref={headerRef}
+        className={`bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border-b border-zinc-200 dark:border-zinc-800 sticky top-0 z-10 transition-transform duration-300 ease-in-out ${
+          headerHidden ? '-translate-y-full' : 'translate-y-0'
+        }`}
+      >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
