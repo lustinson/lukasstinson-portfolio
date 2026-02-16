@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import Image from 'next/image';
 
 interface TimelineItem {
   id: string;
@@ -22,6 +23,16 @@ interface Education {
   endDate: string;
   description: string[];
   keyCoursework: string[];
+}
+
+interface Certification {
+  id: string;
+  name: string;
+  issuer: string;
+  issueDate: string;
+  verificationUrl: string;
+  badgePath?: string;
+  credentialId?: string;
 }
 
 const educationData: Education = {
@@ -46,6 +57,17 @@ const educationData: Education = {
     'Computer Communications and Networks (CSC361)'
   ]
 };
+
+const certificationsData: Certification[] = [
+  {
+    id: 'aws-saa',
+    name: 'AWS Certified Solutions Architect - Associate',
+    issuer: 'Amazon Web Services (AWS)',
+    issueDate: '2025-02',
+    verificationUrl: 'https://www.credly.com/badges/531e91de-9036-4d21-a258-7ca1e1daa68a',
+    badgePath: '/aws-solutions-architect-associate.png',
+  },
+];
 
 const timelineData: TimelineItem[] = [
   {
@@ -181,6 +203,12 @@ const formatDate = (dateString: string) => {
   return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
 };
 
+const formatMonthYear = (dateString: string) => {
+  const [year, month] = dateString.split('-');
+  const date = new Date(parseInt(year), parseInt(month) - 1);
+  return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+};
+
 const getTypeColor = (type: string) => {
   switch (type) {
     case 'experience':
@@ -242,6 +270,7 @@ export default function Home() {
   const filteredData = filter === 'all' 
     ? timelineData 
     : timelineData.filter(item => item.type === filter);
+  const primaryCertification = certificationsData[0];
 
   const handleFilterChange = (newFilter: 'all' | 'experience' | 'project') => {
     setFilter(newFilter);
@@ -343,7 +372,7 @@ export default function Home() {
         <div className="lg:grid lg:grid-cols-12 lg:gap-8">
           {/* Sidebar - About Section (sticky on large screens, top on mobile) */}
           <aside className="lg:col-span-4 mb-8 lg:mb-0">
-            <div className="lg:sticky lg:top-40 space-y-6">
+            <div className={`lg:sticky ${headerHidden ? 'lg:top-4' : 'lg:top-40'} space-y-6 transition-all duration-300`}>
               <div className="bg-transparent lg:bg-zinc-900/75 rounded-lg shadow-sm border border-transparent lg:border-zinc-800 p-6">
                 <h2 className="text-xl font-semibold text-zinc-50 mb-3">
                   Hey There!
@@ -404,12 +433,81 @@ export default function Home() {
                     </span>
                   </div>
                 </div>
+                <div className="mt-4 pt-4 border-t border-zinc-800">
+                  {primaryCertification.badgePath && (
+                    <a
+                      href={primaryCertification.verificationUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block"
+                      aria-label={`View ${primaryCertification.name} credential`}
+                    >
+                      <Image
+                        src={primaryCertification.badgePath}
+                        alt={`${primaryCertification.name} badge`}
+                        width={160}
+                        height={160}
+                        className="mx-auto h-32 w-32 object-contain"
+                        priority
+                      />
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
           </aside>
 
           {/* Main Content Area */}
           <div className="lg:col-span-8">
+            {/* Certifications Section */}
+            <div className="bg-transparent lg:bg-zinc-900/75 rounded-lg shadow-sm border border-transparent lg:border-zinc-800 p-6 mb-8">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-3 h-3 rounded-full bg-orange-500 dark:bg-orange-600"></div>
+                <h2 className="text-2xl font-bold text-zinc-50">
+                  Certifications
+                </h2>
+              </div>
+
+              <div className="space-y-4">
+                {certificationsData.map((cert) => (
+                  <article key={cert.id} className="border-l-4 border-orange-500 dark:border-orange-600 pl-6">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-2">
+                      <div className="flex-1">
+                        <h3 className="text-xl font-semibold text-zinc-50">
+                          {cert.name}
+                        </h3>
+                        <p className="text-orange-400 font-medium">
+                          {cert.issuer}
+                        </p>
+                      <a
+                        href={cert.verificationUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-1 inline-block text-sm text-blue-400 hover:underline"
+                      >
+                        Verify credential
+                      </a>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="text-sm text-zinc-400 whitespace-nowrap">
+                          <time dateTime={`${cert.issueDate}-01`}>Issued {formatMonthYear(cert.issueDate)}</time>
+                        </div>
+                        {cert.badgePath && (
+                          <Image
+                            src={cert.badgePath}
+                            alt={`${cert.name} badge`}
+                            width={84}
+                            height={84}
+                            className="h-16 w-16 sm:h-20 sm:w-20 rounded-sm object-contain"
+                          />
+                        )}
+                    </div>
+                  </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+
             {/* Education Section */}
             <div className="bg-transparent lg:bg-zinc-900/75 rounded-lg shadow-sm border border-transparent lg:border-zinc-800 p-6 mb-8">
           <div className="flex items-center gap-2 mb-4">
@@ -465,7 +563,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-            
+
             {/* Timeline */}
             <div ref={timelineRef} className="mb-6 scroll-mt-60 lg:scroll-mt-40">
               <h2 className="text-2xl font-bold text-zinc-50 mb-6">

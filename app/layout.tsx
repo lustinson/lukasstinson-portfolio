@@ -31,6 +31,9 @@ export const metadata: Metadata = {
     "Web Developer",
     "Toronto Software Developer",
     "AWS",
+    "AWS Certified Solutions Architect - Associate",
+    "AWS Solutions Architect Associate",
+    "AWS Certification",
     "React",
     "TypeScript",
     "Python",
@@ -129,6 +132,20 @@ export default function RootLayout({
     sameAs: [
       "https://www.linkedin.com/in/lukasstinson422/",
       "https://github.com/lustinson"
+    ],
+    hasCredential: [
+      {
+        "@type": "EducationalOccupationalCredential",
+        credentialCategory: "certification",
+        name: "AWS Certified Solutions Architect - Associate",
+        recognizedBy: {
+          "@type": "Organization",
+          name: "Amazon Web Services (AWS)",
+          url: "https://aws.amazon.com/certification/",
+        },
+        dateCreated: "2025-02-15",
+        url: "https://www.credly.com/badges/531e91de-9036-4d21-a258-7ca1e1daa68a",
+      },
     ],
     knowsAbout: [
       "JavaScript",
