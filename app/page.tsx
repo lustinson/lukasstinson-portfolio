@@ -330,38 +330,43 @@ export default function Home() {
               </div>
             </div>
             
-            {/* Filter Buttons */}
-            <div className="flex flex-wrap gap-2">
-              <button
-                onClick={() => handleFilterChange('all')}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                  filter === 'all'
-                    ? 'bg-zinc-900 text-white dark:bg-zinc-50 dark:text-zinc-900'
-                    : 'bg-zinc-200 text-zinc-700 hover:bg-zinc-300 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700'
-                }`}
-              >
-                All
-              </button>
-              <button
-                onClick={() => handleFilterChange('experience')}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                  filter === 'experience'
-                    ? 'bg-blue-600 text-white dark:bg-blue-600'
-                    : 'bg-blue-100 text-blue-700 hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-300 dark:hover:bg-blue-800'
-                }`}
-              >
-                Experience
-              </button>
-              <button
-                onClick={() => handleFilterChange('project')}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                  filter === 'project'
-                    ? 'bg-purple-600 text-white dark:bg-purple-600'
-                    : 'bg-purple-100 text-purple-700 hover:bg-purple-200 dark:bg-purple-900 dark:text-purple-300 dark:hover:bg-purple-800'
-                }`}
-              >
-                Projects
-              </button>
+            {/* Timeline filter */}
+            <div className="flex flex-col gap-2">
+              <span className="text-xs font-medium text-right uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                My Timeline
+              </span>
+              <div className="flex flex-wrap gap-2 rounded-xl bg-zinc-100/80 dark:bg-zinc-800/80 p-1.5 border border-zinc-200/80 dark:border-zinc-700/80">
+                <button
+                  onClick={() => handleFilterChange('all')}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    filter === 'all'
+                      ? 'bg-zinc-900 text-white dark:bg-zinc-50 dark:text-zinc-900 shadow-sm'
+                      : 'text-zinc-600 hover:bg-zinc-200/80 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-700/80 dark:hover:text-zinc-100'
+                  }`}
+                >
+                  All
+                </button>
+                <button
+                  onClick={() => handleFilterChange('experience')}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    filter === 'experience'
+                      ? 'bg-blue-600 text-white dark:bg-blue-600 shadow-sm'
+                      : 'text-blue-600 hover:bg-blue-100 dark:text-blue-400 dark:hover:bg-blue-900/50'
+                  }`}
+                >
+                  Experience
+                </button>
+                <button
+                  onClick={() => handleFilterChange('project')}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    filter === 'project'
+                      ? 'bg-purple-600 text-white dark:bg-purple-600 shadow-sm'
+                      : 'text-purple-600 hover:bg-purple-100 dark:text-purple-400 dark:hover:bg-purple-900/50'
+                  }`}
+                >
+                  Projects
+                </button>
+              </div>
             </div>
           </div>
         </div>
