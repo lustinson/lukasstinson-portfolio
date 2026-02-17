@@ -143,7 +143,7 @@ export default function RootLayout({
           name: "Amazon Web Services (AWS)",
           url: "https://aws.amazon.com/certification/",
         },
-        dateCreated: "2025-02-15",
+        dateCreated: "2026-02-15",
         url: "https://www.credly.com/badges/531e91de-9036-4d21-a258-7ca1e1daa68a",
       },
     ],

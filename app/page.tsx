@@ -63,7 +63,7 @@ const certificationsData: Certification[] = [
     id: 'aws-saa',
     name: 'AWS Certified Solutions Architect - Associate',
     issuer: 'Amazon Web Services (AWS)',
-    issueDate: '2025-02',
+    issueDate: '2026-02',
     verificationUrl: 'https://www.credly.com/badges/531e91de-9036-4d21-a258-7ca1e1daa68a',
     badgePath: '/aws-solutions-architect-associate.png',
   },
