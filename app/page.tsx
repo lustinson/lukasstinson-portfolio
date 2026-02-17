@@ -71,7 +71,7 @@ const certificationsData: Certification[] = [
 
 const timelineData: TimelineItem[] = [
   {
-    id: '9',
+    id: '10',
     type: 'experience' as const,
     title: 'Full Stack Developer',
     organization: 'Buildwithdave.com',
@@ -79,9 +79,23 @@ const timelineData: TimelineItem[] = [
     startDate: '2025-12',
     endDate: 'present',
     description: [
-     'Currently working as part of a 3-person team, contributing across the stack to help bring an early-stage product to market and support user growth and fundraising efforts',
-     'Owning and shipping features across a React/TypeScript frontend and Go backend',
-     'Optimizing the marketing site, applying SEO best practices'
+      'Currently working as part of a 3-person early-stage startup team, contributing across the stack to bring a new product to market and support user growth and fundraising efforts',
+      'Owning and shipping production features across a React/TypeScript frontend and Go backend',
+      'Optimizing the marketing website, implementing SEO best practices to improve discoverability and conversion'
+    ],
+  },
+  {
+    id: '9',
+    type: 'experience' as const,
+    title: 'Web Developer (Contract)',
+    organization: 'DontBonk.ca',
+    location: undefined,
+    startDate: '2026-01',
+    endDate: 'present',
+    description: [
+      'Designed and deployed a production marketing website for an endurance sports nutrition startup',
+      'Managed end-to-end deployment, domain configuration, and hosting',
+      'Continuing to iterate on product launch functionality and feature updates'
     ],
   },
   {
@@ -90,29 +104,15 @@ const timelineData: TimelineItem[] = [
     title: 'Software Developer',
     organization: '8Twelve Mortgage Corp.',
     location: 'Toronto, ON',
-    startDate: '2024-09',
+    startDate: '2023-05',
     endDate: '2025-11',
     description: [
+      'Promoted from Intern to Full-Time',
       'Designed and maintained ETL pipelines using AWS Glue to clean, normalize, and transform large PostgreSQL datasets used for analytics, dashboards, and regulatory reporting',
       'Developed new partner lead ingestion integrations and migrated legacy ingestion pipelines, improving throughput and strengthening the INFIN8 CRM\'s data accuracy',
       'Led the migration of the company\'s reporting platform from Power BI to AWS QuickSight, cutting infrastructure costs by $2,500 per month',
       'Built an automated mortgage renewal notification system for deal agents, contributing to a 50% increase in renewal leads year-over-year',
-      'Cleaned and standardized client and deal data to support successful data migration into a rebuilt INFIN8 platform',
-      'Collaborated with cross-functional teams to document requirements, validate data quality, and conduct code reviews during platform migration'
-    ],
-  },
-  {
-    id: '7',
-    type: 'experience' as const,
-    title: 'Software Developer (Intern)',
-    organization: '8Twelve Mortgage Corp.',
-    location: 'Toronto, ON',
-    startDate: '2023-05',
-    endDate: '2024-08',
-    description: [
-      'Designed and implemented an automated email system using Microsoft\'s Power Automate and Power BI that seamlessly delivers vital KPI reports directly to executives and stakeholders',
-      'Leveraged various distributed AWS services (Glue ETL, Lambda, S3, Pinpoint) to streamline customer and client engagement by creating automated messaging systems and promotional email campaigns',
-      'Maintained and updated a reporting webpage to display real-time reports'
+      'Collaborated with cross-functional teams to document requirements, validate data quality, and conduct code reviews during our platform migration'
     ],
   },
   {
@@ -164,8 +164,7 @@ const timelineData: TimelineItem[] = [
     endDate: '2021-08',
     description: [
       'Collaborated with the IT team in a large-scale ERP/data migration project, providing critical assistance throughout the implementation process',
-      'Applied SQL skills to create mapping tables, load data, and generate barcodes for products, ensuring seamless data integration and streamlined operations',
-      'Employed a .NET C# framework to update the invoice generator, enabling customized fee adjustments for specific customers'
+      'Applied SQL skills to create mapping tables, load data, and generate barcodes for products, ensuring seamless data integration and streamlined operations'
     ],
   },
   {
@@ -192,7 +191,7 @@ const timelineData: TimelineItem[] = [
       'Implemented inventory management and shopping cart functionality'
     ],
   },
-].sort((a, b) => b.startDate.localeCompare(a.startDate));
+].sort((a, b) => Number(b.id) - Number(a.id));
 
 const formatDate = (dateString: string) => {
   if (dateString.toLowerCase() === 'present') {
