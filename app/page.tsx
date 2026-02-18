@@ -233,6 +233,7 @@ const getTypeBadgeColor = (type: string) => {
 export default function Home() {
   const [filter, setFilter] = useState<'all' | 'experience' | 'project'>('all');
   const timelineRef = useRef<HTMLDivElement>(null);
+  const certificationsRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLElement>(null);
   const [headerHidden, setHeaderHidden] = useState(false);
   const headerHeightRef = useRef(0);
@@ -240,9 +241,19 @@ export default function Home() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (!timelineRef.current || !headerRef.current) return;
+      if (!certificationsRef.current || !headerRef.current) return;
 
-      const timelineRect = timelineRef.current.getBoundingClientRect();
+      // Only hide header on mobile (< 640px)
+      const isMobile = window.innerWidth < 640;
+      if (!isMobile) {
+        if (headerHiddenRef.current) {
+          headerHiddenRef.current = false;
+          setHeaderHidden(false);
+        }
+        return;
+      }
+
+      const timelineRect = certificationsRef.current.getBoundingClientRect();
       const headerRect = headerRef.current.getBoundingClientRect();
       
       // Store header height when visible
@@ -260,10 +271,15 @@ export default function Home() {
       }
     };
 
+    window.addEventListener('resize', handleScroll);
+
     window.addEventListener('scroll', handleScroll);
     handleScroll();
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
   }, []);
 
   const filteredData = filter === 'all' 
@@ -371,6 +387,51 @@ export default function Home() {
         </div>
       </header>
 
+      {/* Floating filter bar — visible when header is hidden */}
+      <div className={`fixed top-0 left-0 right-0 z-10 transition-transform duration-300 ease-in-out ${headerHidden ? 'translate-y-0' : '-translate-y-full'}`}>
+        <div className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm border-b border-zinc-200 dark:border-zinc-800">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div className="flex flex-col gap-1.5">
+              <span className="text-xs font-medium text-left sm:text-right uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                My Timeline
+              </span>
+              <div className="flex gap-2 rounded-xl bg-zinc-100/80 dark:bg-zinc-800/80 p-1.5 border border-zinc-200/80 dark:border-zinc-700/80">
+                <button
+                  onClick={() => handleFilterChange('all')}
+                  className={`flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors text-center ${
+                    filter === 'all'
+                      ? 'bg-zinc-900 text-white dark:bg-zinc-50 dark:text-zinc-900 shadow-sm'
+                      : 'text-zinc-600 hover:bg-zinc-200/80 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-700/80 dark:hover:text-zinc-100'
+                  }`}
+                >
+                  All
+                </button>
+                <button
+                  onClick={() => handleFilterChange('experience')}
+                  className={`flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors text-center ${
+                    filter === 'experience'
+                      ? 'bg-blue-600 text-white dark:bg-blue-600 shadow-sm'
+                      : 'text-blue-600 hover:bg-blue-100 dark:text-blue-400 dark:hover:bg-blue-900/50'
+                  }`}
+                >
+                  Experience
+                </button>
+                <button
+                  onClick={() => handleFilterChange('project')}
+                  className={`flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors text-center ${
+                    filter === 'project'
+                      ? 'bg-purple-600 text-white dark:bg-purple-600 shadow-sm'
+                      : 'text-purple-600 hover:bg-purple-100 dark:text-purple-400 dark:hover:bg-purple-900/50'
+                  }`}
+                >
+                  Projects
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-zinc-900/75">
         <div className="lg:grid lg:grid-cols-12 lg:gap-8">
@@ -464,7 +525,7 @@ export default function Home() {
           {/* Main Content Area */}
           <div className="lg:col-span-8">
             {/* Certifications Section */}
-            <div className="bg-transparent lg:bg-zinc-900/75 rounded-lg shadow-sm border border-transparent lg:border-zinc-800 p-6 mb-8">
+            <div ref={certificationsRef} className="bg-transparent lg:bg-zinc-900/75 rounded-lg shadow-sm border border-transparent lg:border-zinc-800 p-6 mb-8">
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-3 h-3 rounded-full bg-orange-500 dark:bg-orange-600"></div>
                 <h2 className="text-2xl font-bold text-zinc-50">
@@ -569,7 +630,7 @@ export default function Home() {
           </div>
 
             {/* Timeline */}
-            <div ref={timelineRef} className="mb-6 scroll-mt-60 lg:scroll-mt-40">
+            <div ref={timelineRef} className="mb-6 scroll-mt-38 lg:scroll-mt-40">
               <h2 className="text-2xl font-bold text-zinc-50 mb-6">
                 Experience & Projects
               </h2>
