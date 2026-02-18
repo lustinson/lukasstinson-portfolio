@@ -331,13 +331,13 @@ export default function Home() {
             
             {/* Timeline filter */}
             <div className="flex flex-col gap-2">
-              <span className="text-xs font-medium text-right uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+              <span className="text-xs font-medium text-left sm:text-right uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
                 My Timeline
               </span>
-              <div className="flex flex-wrap gap-2 rounded-xl bg-zinc-100/80 dark:bg-zinc-800/80 p-1.5 border border-zinc-200/80 dark:border-zinc-700/80">
+              <div className="flex gap-2 rounded-xl bg-zinc-100/80 dark:bg-zinc-800/80 p-1.5 border border-zinc-200/80 dark:border-zinc-700/80">
                 <button
                   onClick={() => handleFilterChange('all')}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  className={`flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors text-center ${
                     filter === 'all'
                       ? 'bg-zinc-900 text-white dark:bg-zinc-50 dark:text-zinc-900 shadow-sm'
                       : 'text-zinc-600 hover:bg-zinc-200/80 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-700/80 dark:hover:text-zinc-100'
@@ -347,7 +347,7 @@ export default function Home() {
                 </button>
                 <button
                   onClick={() => handleFilterChange('experience')}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  className={`flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors text-center ${
                     filter === 'experience'
                       ? 'bg-blue-600 text-white dark:bg-blue-600 shadow-sm'
                       : 'text-blue-600 hover:bg-blue-100 dark:text-blue-400 dark:hover:bg-blue-900/50'
@@ -357,7 +357,7 @@ export default function Home() {
                 </button>
                 <button
                   onClick={() => handleFilterChange('project')}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  className={`flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-colors text-center ${
                     filter === 'project'
                       ? 'bg-purple-600 text-white dark:bg-purple-600 shadow-sm'
                       : 'text-purple-600 hover:bg-purple-100 dark:text-purple-400 dark:hover:bg-purple-900/50'
