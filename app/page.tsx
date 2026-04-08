@@ -71,6 +71,21 @@ const certificationsData: Certification[] = [
 
 const timelineData: TimelineItem[] = [
   {
+    id: '11',
+    type: 'project' as const,
+    title: 'KOM Hunter',
+    organization: 'Personal Project',
+    startDate: '2025-03',
+    endDate: 'present',
+    description: [
+      'Full-stack web app analyzing nearby Strava segments and predicting which KOM records are within reach based on real power output',
+      'Built with Next.js 15, React 19, TypeScript—Strava OAuth 2.0 with encrypted HTTP-only sessions',
+      'Implemented physics-based power model calculating watts required for each segment using aerodynamic drag, rolling resistance, and real-time weather',
+      'Deployed on Vercel with pure domain functions for all power curve and analysis logic—no database for v1, all data fetched on-demand from Strava API'
+    ],
+    highlights: 'Rebuilt production Python analysis script into a stateless MVP with real OAuth, live weather integration, and sliding window algorithms for power curve computation'
+  },
+  {
     id: '10',
     type: 'experience' as const,
     title: 'Full Stack Developer',
