@@ -75,7 +75,7 @@ const timelineData: TimelineItem[] = [
     type: 'project' as const,
     title: 'KOM Hunter',
     organization: 'Personal Project',
-    startDate: '2025-03',
+    startDate: '2026-03',
     endDate: 'present',
     description: [
       'Full-stack web app analyzing nearby Strava segments and predicting which KOM records are within reach based on real power output',
