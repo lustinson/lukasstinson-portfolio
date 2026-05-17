@@ -29,6 +29,7 @@ export const metadata: Metadata = {
     "Software Developer",
     "Full Stack Developer",
     "Web Developer",
+    "Victoria Software Developer",
     "Toronto Software Developer",
     "AWS",
     "AWS Certified Solutions Architect - Associate",
