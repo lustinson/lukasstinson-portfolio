@@ -73,7 +73,7 @@ const timelineData: TimelineItem[] = [
   {
     id: '11',
     type: 'project' as const,
-    title: 'KOM Hunter',
+    title: 'KOM Radar',
     organization: 'Personal Project',
     startDate: '2026-03',
     endDate: 'present',
