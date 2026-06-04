@@ -102,7 +102,7 @@ const timelineData: TimelineItem[] = [
   {
     id: '9',
     type: 'experience' as const,
-    title: 'Web Developer (Contract)',
+    title: 'Web Developer',
     organization: 'DontBonk.ca',
     location: undefined,
     startDate: '2026-01',
