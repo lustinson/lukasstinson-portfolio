@@ -223,6 +223,18 @@ const formatMonthYear = (dateString: string) => {
   return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 };
 
+const domainPattern = /(?:^https?:\/\/|\.(?:com|org|net|io|ca|dev|ai|co|edu|gov|us|uk)\b)/i;
+
+const getOrganizationUrl = (organization: string) => {
+  if (!domainPattern.test(organization)) {
+    return null;
+  }
+
+  return /^https?:\/\//i.test(organization)
+    ? organization
+    : `https://${organization.toLowerCase()}`;
+};
+
 const getTypeColor = (type: string) => {
   switch (type) {
     case 'experience':
@@ -657,7 +669,7 @@ export default function Home() {
 
               {/* Timeline items */}
               <div className="space-y-8">
-                {filteredData.map((item, index) => (
+                {filteredData.map((item) => (
                   <article key={item.id} className="relative pl-20 group">
                     {/* Timeline dot */}
                     <div
@@ -668,6 +680,10 @@ export default function Home() {
 
                     {/* Card */}
                     <div className="bg-transparent lg:bg-zinc-900/75 rounded-lg shadow-sm border border-transparent lg:border-zinc-800 p-6 hover:shadow-md transition-shadow">
+                      {(() => {
+                        const organizationUrl = getOrganizationUrl(item.organization);
+
+                        return (
                       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
                         <div>
                           <div className="flex items-center gap-2 mb-1">
@@ -683,9 +699,9 @@ export default function Home() {
                             {item.title}
                           </h3>
                           <p className="text-blue-600 dark:text-blue-400 font-medium">
-                            {/^https?:\/\/|(\.com|\.org|\.net|\.io|\.ca|\.dev|\.ai|\.co|\.edu|\.gov|\.us|\.uk)\b/i.test(item.organization) ? (
+                            {organizationUrl ? (
                               <a 
-                                href={`https://${item.organization.toLowerCase()}`}
+                                href={organizationUrl}
                                 target="_blank" 
                                 rel="noopener noreferrer"
                                 className="hover:underline"
@@ -708,6 +724,8 @@ export default function Home() {
                           <time dateTime={item.endDate}>{formatDate(item.endDate)}</time>
                         </div>
                       </div>
+                        );
+                      })()}
 
                       <ul className="space-y-2 text-zinc-300">
                         {item.description.map((desc, idx) => (
